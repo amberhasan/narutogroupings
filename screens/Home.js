@@ -54,18 +54,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     marginVertical: 10,
-    borderWidth: 1,
+    borderWidth: 3,
     borderColor: 'black',
     padding: 10,
     borderRadius: 5,
   },
   image: {
-    width: 80, // Adjust the width as per your preference
-    height: 80, // Adjust the height as per your preference
+    width: 250, // Adjust the width as per your preference
+    height: 120, // Adjust the height as per your preference
     marginBottom: 10,
   },
   text: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   screenContainer: {
