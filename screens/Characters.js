@@ -26,16 +26,14 @@ const Characters = () => {
   }
 
   const renderCharacterItem = ({item}) => {
-    const {name, image, gender, rank, ninjaRegistration} = item;
+    const {name, images, gender, rank, ninjaRegistration} = item;
+    console.log('image', images[0]);
 
     return (
       <TouchableOpacity style={styles.characterItem}>
-        <Image source={{uri: image}} style={styles.characterImage} />
+        <Image source={{uri: images[0]}} style={styles.characterImage} />
         <View style={styles.characterInfo}>
           <Text style={styles.characterName}>{name}</Text>
-          <Text style={styles.characterDetails}>Gender: {gender}</Text>
-
-          {/* Add more properties here */}
         </View>
       </TouchableOpacity>
     );
@@ -43,11 +41,7 @@ const Characters = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={characters}
-        keyExtractor={item => item.id.toString()}
-        renderItem={renderCharacterItem}
-      />
+      <FlatList data={characters} renderItem={renderCharacterItem} />
     </View>
   );
 };
