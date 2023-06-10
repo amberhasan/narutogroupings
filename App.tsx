@@ -1,10 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Characters from './screens/Characters';
-import Clans from './screens/Clans';
-import Villages from './screens/Villages';
-import Home from './screens/Home';
+import CharactersScreen from './screens/CharactersScreen';
+import ClansScreen from './screens/ClansScreen';
+import VillagesScreen from './screens/VillagesScreen';
+import HomeScreen from './screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,10 +12,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Characters" component={Characters} />
-        <Stack.Screen name="Clans" component={Clans} />
-        <Stack.Screen name="Villages" component={Villages} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="CharactersScreen" component={CharactersScreen} />
+        <Stack.Screen name="ClansScreen" component={ClansScreen} />
+        <Stack.Screen name="VillagesScreen" component={VillagesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

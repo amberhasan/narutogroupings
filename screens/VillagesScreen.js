@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const Villages = () => {
+const VillagesScreen = () => {
   return (
     <View>
       <Text>Villages Screen</Text>
@@ -9,4 +9,4 @@ const Villages = () => {
   );
 };
 
-export default Villages;
+export default VillagesScreen;

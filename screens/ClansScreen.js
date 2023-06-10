@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 
-const Clans = () => {
+const ClansScreen = () => {
   const [clans, setClans] = useState([]);
 
   useEffect(() => {
@@ -36,4 +36,4 @@ const Clans = () => {
   );
 };
 
-export default Clans;
+export default ClansScreen;

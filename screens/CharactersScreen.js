@@ -7,8 +7,9 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
+import CharacterRow from '../components/CharacterRow';
 
-const Characters = () => {
+const CharactersScreen = () => {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
@@ -26,17 +27,7 @@ const Characters = () => {
   }
 
   const renderCharacterItem = ({item}) => {
-    const {name, images, gender, rank, ninjaRegistration} = item;
-    console.log('image', images[0]);
-
-    return (
-      <TouchableOpacity style={styles.characterItem}>
-        <Image source={{uri: images[0]}} style={styles.characterImage} />
-        <View style={styles.characterInfo}>
-          <Text style={styles.characterName}>{name}</Text>
-        </View>
-      </TouchableOpacity>
-    );
+    return <CharacterRow character={item} onPress={() => {}} />;
   };
 
   return (
@@ -81,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Characters;
+export default CharactersScreen;

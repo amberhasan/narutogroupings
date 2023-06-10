@@ -2,12 +2,12 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import Characters from './Characters';
-import Clans from './Clans';
-import Villages from './Villages';
+import Characters from './CharactersScreen';
+import Clans from './ClansScreen';
+import Villages from './VillagesScreen';
 
 // Home Screen
-const Home = () => {
+const HomeScreen = () => {
   const navigation = useNavigation();
 
   const handlePress = screenName => {
@@ -18,7 +18,7 @@ const Home = () => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.rowContainer}
-        onPress={() => handlePress('Characters')}>
+        onPress={() => handlePress('CharactersScreen')}>
         <Image
           source={require('../images/characters.png')}
           style={styles.image}
@@ -27,13 +27,13 @@ const Home = () => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.rowContainer}
-        onPress={() => handlePress('Clans')}>
+        onPress={() => handlePress('ClansScreen')}>
         <Image source={require('../images/clans.png')} style={styles.image} />
         <Text style={styles.text}>Clans</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.rowContainer}
-        onPress={() => handlePress('Villages')}>
+        onPress={() => handlePress('VillagesScreen')}>
         <Image
           source={require('../images/villages.png')}
           style={styles.image}
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeScreen;
