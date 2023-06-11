@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import {View, FlatList} from 'react-native';
+import ClanRow from '../../components/ClanRow';
 
 const ClansScreen = () => {
   const [clans, setClans] = useState([]);
@@ -15,23 +16,13 @@ const ClansScreen = () => {
 
       setClans(jsonData.clans);
     } catch (error) {
-      console.log('Error fetching characters:', error);
+      console.log('Error fetching clans:', error);
     }
   }
 
   return (
     <View style={{flex: 1}}>
-      <FlatList
-        data={clans}
-        keyExtractor={item => item.id.toString()} // Provide a unique identifier for each item
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity>
-              <Text>{item.name}</Text>
-            </TouchableOpacity>
-          );
-        }}
-      />
+      <FlatList data={clans} renderItem={({item}) => <ClanRow clan={item} />} />
     </View>
   );
 };

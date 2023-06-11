@@ -7,21 +7,14 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
-import CharacterProfileScreen from '../screens/CharacterProfileScreen';
 
 const CharacterRow = props => {
   const {name, images, gender, rank, ninjaRegistration} = props.character;
-
   return (
-    <TouchableOpacity
-      style={styles.characterItem}
-      onPress={() => {
-        props.route.navigation.navigate('CharacterProfileScreen', {character});
-      }}>
+    <TouchableOpacity style={styles.characterItem} onPress={props.onPress}>
       <Image source={{uri: images[0]}} style={styles.characterImage} />
       <View style={styles.characterInfo}>
         <Text style={styles.characterName}>{name}</Text>
-        {/* Render additional character details here */}
       </View>
     </TouchableOpacity>
   );
