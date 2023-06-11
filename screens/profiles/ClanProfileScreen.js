@@ -77,30 +77,6 @@ const CharacterProfileScreen = ({route}) => {
           ))}
         </View>
       )}
-      {character.family && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Family</Text>
-          {Object.entries(character.family).map(([relation, name], index) => (
-            <Text key={index} style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>
-                {relation}: {name}
-              </Text>
-            </Text>
-          ))}
-        </View>
-      )}
-      {character.natureType && character.natureType.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Nature Type</Text>
-          {character.natureType.map((nature, index) => (
-            <Text key={index} style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>{nature}</Text>
-            </Text>
-          ))}
-        </View>
-      )}
     </ScrollView>
   );
 };

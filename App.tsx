@@ -6,6 +6,8 @@ import ClansScreen from './screens/main/ClansScreen';
 import VillagesScreen from './screens/main/VillagesScreen';
 import HomeScreen from './screens/main/HomeScreen';
 import CharacterProfileScreen from './screens/profiles/CharacterProfileScreen';
+import ClanProfileScreen from './screens/profiles/ClanProfileScreen';
+import VillageProfileScreen from './screens/profiles/VillageProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +22,11 @@ export default function App() {
         <Stack.Screen
           name="CharacterProfileScreen"
           component={CharacterProfileScreen}
+        />
+        <Stack.Screen name="ClanProfileScreen" component={ClanProfileScreen} />
+        <Stack.Screen
+          name="VillageProfileScreen"
+          component={VillageProfileScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

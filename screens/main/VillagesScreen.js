@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, FlatList} from 'react-native';
 import VillageRow from '../../components/VillageRow';
 
-const VillagesScreen = () => {
+const VillagesScreen = ({navigation}) => {
   const [villages, setVillages] = useState([]);
 
   useEffect(() => {
@@ -19,13 +19,20 @@ const VillagesScreen = () => {
     }
   }
 
+  const renderVillageItem = ({item}) => {
+    return (
+      <VillageRow
+        village={item}
+        onPress={() => {
+          navigation.navigate('VillageProfileScreen', {village: item});
+        }}
+      />
+    );
+  };
+
   return (
     <View style={{flex: 1}}>
-      <FlatList
-        data={villages}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => <VillageRow village={item} />}
-      />
+      <FlatList data={villages} renderItem={renderVillageItem} />
     </View>
   );
 };

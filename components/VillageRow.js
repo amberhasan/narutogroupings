@@ -1,12 +1,15 @@
 import React from 'react';
 import {TouchableOpacity, Image, View, Text, StyleSheet} from 'react-native';
 
-const VillageRow = ({village}) => {
-  const {name, image} = village;
+const VillageRow = props => {
+  const {name, image} = props.village;
 
   return (
-    <TouchableOpacity style={styles.villageItem}>
-      <Image source={{uri: image}} style={styles.villageImage} />
+    <TouchableOpacity style={styles.villageItem} onPress={props.onPress}>
+      <Image
+        source={require('../images/village.png')}
+        style={styles.villageImage}
+      />
       <View style={styles.villageInfo}>
         <Text style={styles.villageName}>{name}</Text>
       </View>

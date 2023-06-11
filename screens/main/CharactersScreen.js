@@ -70,11 +70,7 @@ const CharactersScreen = ({navigation}) => {
         value={searchText}
         onChangeText={setSearchText}
       />
-      <FlatList
-        data={filteredCharacters}
-        renderItem={renderCharacterItem}
-        keyExtractor={item => item.id.toString()}
-      />
+      <FlatList data={filteredCharacters} renderItem={renderCharacterItem} />
     </View>
   );
 };
