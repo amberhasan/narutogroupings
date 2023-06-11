@@ -19,27 +19,17 @@ const ClansScreen = ({navigation}) => {
     }
   }
 
-  const renderClanItem = ({item}) => {
-    console.log('in here');
+  const navigateToClanProfile = clan => {
+    navigation.navigate('ClanProfileScreen', {clan});
+  };
 
-    return (
-      <VillageRow
-        clan={item}
-        onPress={() => {
-          navigation.navigate('ClanProfileScreen', {clan: item});
-        }}
-      />
-    );
+  const renderClanItem = ({item}) => {
+    return <ClanRow clan={item} onPress={() => navigateToClanProfile(item)} />;
   };
 
   return (
     <View style={{flex: 1}}>
-      <FlatList
-        data={clans}
-        renderItem={({item}) => (
-          <ClanRow clan={item} onPress={renderClanItem} />
-        )}
-      />
+      <FlatList data={clans} renderItem={renderClanItem} />
     </View>
   );
 };

@@ -1,132 +1,101 @@
-import React from 'react';
-import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 
-const CharacterProfileScreen = ({route}) => {
-  const {character} = route.params;
+const ClanProfileScreen = ({route, navigation}) => {
+  const {clan} = route.params;
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleCharacterPress = character => {
+    navigation.navigate('CharacterProfileScreen', {character});
+  };
+
+  const sortedCharacters = clan.characters.sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
+
+  const filteredCharacters = sortedCharacters.filter(character =>
+    character.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <Image
-          source={{uri: character.images[0]}}
-          style={styles.characterImage}
-        />
-        <View style={styles.characterInfo}>
-          <Text style={styles.characterName}>{character.name}</Text>
-        </View>
-      </View>
-      {character.debut && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Debut</Text>
-          {character.debut.movie && (
-            <Text style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>
-                {character.debut.movie}
-              </Text>
-            </Text>
-          )}
-          {character.debut.novel && (
-            <Text style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>
-                {character.debut.novel}
-              </Text>
-            </Text>
-          )}
-          {character.debut.appearsIn && (
-            <Text style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>
-                {character.debut.appearsIn}
-              </Text>
-            </Text>
-          )}
-        </View>
-      )}
-      {character.jutsu && character.jutsu.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Jutsu</Text>
-          {character.jutsu.map((jutsu, index) => (
-            <Text key={index} style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>{jutsu}</Text>
-            </Text>
-          ))}
-        </View>
-      )}
-      {character.personal && character.personal.species && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Personal</Text>
-          <Text style={styles.sectionText}>
-            <Text style={styles.bulletPoint}>•</Text>{' '}
-            <Text style={styles.sectionTextContent}>
-              {character.personal.species}
-            </Text>
-          </Text>
-        </View>
-      )}
-      {character.uniqueTraits && character.uniqueTraits.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Unique Traits</Text>
-          {character.uniqueTraits.map((trait, index) => (
-            <Text key={index} style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>{trait}</Text>
-            </Text>
-          ))}
-        </View>
-      )}
-    </ScrollView>
+    <View style={styles.container}>
+      <Text style={styles.clanName}>{clan.name}</Text>
+
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search characters"
+        value={searchQuery}
+        onChangeText={text => setSearchQuery(text)}
+      />
+
+      <FlatList
+        data={filteredCharacters}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            style={styles.characterContainer}
+            onPress={() => handleCharacterPress(item)}>
+            <View style={styles.characterBox}>
+              <Image
+                source={{uri: item.images[0]}}
+                style={styles.characterImage}
+              />
+              <Text style={styles.characterName}>{item.name}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    padding: 20,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  characterImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-    marginRight: 10,
-  },
-  characterInfo: {
     flex: 1,
+    padding: 10,
   },
-  characterName: {
+  clanName: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 10,
   },
-  section: {
-    marginBottom: 20,
+  searchInput: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+  },
+  characterContainer: {
+    marginBottom: 10,
+  },
+  characterBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
     padding: 10,
   },
-  sectionTitle: {
+  characterImage: {
+    width: 80,
+    height: 80,
+    marginRight: 10,
+    borderRadius: 5,
+  },
+  characterName: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  sectionText: {
-    fontSize: 14,
-    marginBottom: 5,
-  },
-  bulletPoint: {
-    fontSize: 14,
-    marginRight: 5,
-  },
-  sectionTextContent: {
-    fontSize: 14,
   },
 });
 
-export default CharacterProfileScreen;
+export default ClanProfileScreen;

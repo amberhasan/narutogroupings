@@ -1,11 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
 
-const ClanRow = ({clan}) => {
+const ClanRow = props => {
   console.log('Here in ClanRow');
   return (
-    <TouchableOpacity style={styles.clanItem}>
-      <Text style={styles.clanName}>{clan.name}</Text>
+    <TouchableOpacity style={styles.clanItem} onPress={props.onPress}>
+      <Text style={styles.clanName}>{props.clan.name}</Text>
     </TouchableOpacity>
   );
 };
