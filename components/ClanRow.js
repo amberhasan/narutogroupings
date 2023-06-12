@@ -1,16 +1,15 @@
 import React from 'react';
-import {TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 
 const ClanRow = props => {
-  console.log('Here in ClanRow');
+  const {name, symbol, description} = props.clan;
   return (
     <TouchableOpacity style={styles.clanItem} onPress={props.onPress}>
-      <Image
-        source={require('../images/clan.png')}
-        style={styles.clanImage}
-        resizeMode="cover"
-      />
-      <Text style={styles.clanName}>{props.clan.name}</Text>
+      <Image source={require('../images/clan.png')} style={styles.clanImage} />
+      <View style={styles.clanInfo}>
+        <Text style={styles.clanName}>{name}</Text>
+        <Text style={styles.clanDescription}>{description}</Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -25,16 +24,24 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginBottom: 10,
     padding: 10,
+    height: 120,
   },
   clanImage: {
-    width: 50,
-    height: 50,
+    width: 80,
+    height: 80,
     marginRight: 10,
     borderRadius: 5,
   },
+  clanInfo: {
+    flex: 1,
+  },
   clanName: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  clanDescription: {
+    fontSize: 14,
   },
 });
 

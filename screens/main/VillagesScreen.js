@@ -12,7 +12,7 @@ const VillagesScreen = ({navigation}) => {
 
   async function getVillages() {
     try {
-      const response = await fetch('https://api.narutodb.xyz/village');
+      const response = await fetch('https://api.narutodb.xyz/village?limit=39');
       const jsonData = await response.json();
       setVillages(jsonData.villages);
     } catch (error) {

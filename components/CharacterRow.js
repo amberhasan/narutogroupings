@@ -12,7 +12,12 @@ const CharacterRow = props => {
   const {name, images, gender, rank, ninjaRegistration} = props.character;
   return (
     <TouchableOpacity style={styles.characterItem} onPress={props.onPress}>
-      <Image source={{uri: images[0]}} style={styles.characterImage} />
+      <Image
+        source={
+          images[0] ? {uri: images[0]} : require('../images/notavailable.png')
+        }
+        style={styles.characterImage}
+      />
       <View style={styles.characterInfo}>
         <Text style={styles.characterName}>{name}</Text>
       </View>

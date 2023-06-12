@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import CharacterRow from '../../components/CharacterRow';
 
 const ClanProfileScreen = ({route, navigation}) => {
   const {clan} = route.params;
@@ -38,19 +39,13 @@ const ClanProfileScreen = ({route, navigation}) => {
 
       <FlatList
         data={filteredCharacters}
-        keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.characterContainer}
-            onPress={() => handleCharacterPress(item)}>
-            <View style={styles.characterBox}>
-              <Image
-                source={{uri: item.images[0]}}
-                style={styles.characterImage}
-              />
-              <Text style={styles.characterName}>{item.name}</Text>
-            </View>
-          </TouchableOpacity>
+          <CharacterRow
+            character={item}
+            onPress={() => {
+              navigation.navigate('CharacterProfileScreen', {character: item});
+            }}
+          />
         )}
       />
     </View>

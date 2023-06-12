@@ -8,9 +8,14 @@ const CharacterProfileScreen = ({route}) => {
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <Image
-          source={{uri: character.images[0]}}
+          source={
+            character.images[0]
+              ? {uri: character.images[0]}
+              : require('../../images/notavailable.png')
+          }
           style={styles.characterImage}
         />
+
         <View style={styles.characterInfo}>
           <Text style={styles.characterName}>{character.name}</Text>
         </View>

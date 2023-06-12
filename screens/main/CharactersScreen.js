@@ -25,7 +25,9 @@ const CharactersScreen = ({navigation}) => {
 
   async function getCharacters() {
     try {
-      const response = await fetch('https://api.narutodb.xyz/character?page=1');
+      const response = await fetch(
+        'https://api.narutodb.xyz/character?limit=1431',
+      );
       const jsonData = await response.json();
       setCharacters(jsonData.characters);
     } catch (error) {

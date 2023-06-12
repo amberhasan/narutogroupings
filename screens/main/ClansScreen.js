@@ -12,7 +12,7 @@ const ClansScreen = ({navigation}) => {
 
   async function getClans() {
     try {
-      const response = await fetch('https://api.narutodb.xyz/clan');
+      const response = await fetch('https://api.narutodb.xyz/clan?limit=57');
       const jsonData = await response.json();
       setClans(jsonData.clans);
     } catch (error) {
