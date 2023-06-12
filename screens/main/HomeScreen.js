@@ -52,29 +52,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFE4C4', // Orange background color
   },
   rowContainer: {
     flexDirection: 'column',
     alignItems: 'center',
     marginVertical: 10,
-    borderWidth: 3,
+    backgroundColor: 'white', // White background color for boxes
+    borderWidth: 1,
     borderColor: 'black',
     padding: 10,
     borderRadius: 5,
   },
   image: {
-    width: 250, // Adjust the width as per your preference
-    height: 120, // Adjust the height as per your preference
+    width: 250,
+    height: 120,
     marginBottom: 10,
   },
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  screenContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
