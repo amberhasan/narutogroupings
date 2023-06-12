@@ -5,6 +5,11 @@ const ClanRow = props => {
   console.log('Here in ClanRow');
   return (
     <TouchableOpacity style={styles.clanItem} onPress={props.onPress}>
+      <Image
+        source={require('../images/clan.png')}
+        style={styles.clanImage}
+        resizeMode="cover"
+      />
       <Text style={styles.clanName}>{props.clan.name}</Text>
     </TouchableOpacity>
   );
@@ -25,7 +30,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginRight: 10,
-    borderRadius: 25,
+    borderRadius: 5,
   },
   clanName: {
     fontSize: 16,
