@@ -4,16 +4,18 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
-  Image,
+  ActivityIndicator,
   StyleSheet,
   TextInput,
 } from 'react-native';
 import CharacterRow from '../../components/CharacterRow';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const CharactersScreen = ({navigation}) => {
   const [characters, setCharacters] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [filteredCharacters, setFilteredCharacters] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getCharacters();
@@ -24,13 +26,19 @@ const CharactersScreen = ({navigation}) => {
   }, [characters, searchText]);
 
   async function getCharacters() {
+    // todo: replace fetch axios
+    // todo: infinite pagination (FB),
+    // todo: create apis / separate the apis.
     try {
+      setLoading(true);
       const response = await fetch(
         'https://api.narutodb.xyz/character?limit=1431',
       );
       const jsonData = await response.json();
       setCharacters(jsonData.characters);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log('Error fetching characters:', error);
     }
   }
@@ -41,6 +49,10 @@ const CharactersScreen = ({navigation}) => {
     );
     setFilteredCharacters(filtered);
   };
+
+  if (loading) {
+    return <LoadingIndicator />;
+  }
 
   const renderCharacterItem = ({item}) => {
     const hasContent =

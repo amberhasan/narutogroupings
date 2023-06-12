@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -26,6 +26,10 @@ const VillageProfileScreen = ({route, navigation}) => {
   const filteredCharacters = sortedCharacters.filter(character =>
     character.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  useEffect(() => {
+    navigation.setOptions({title: `${village.name}`});
+  }, []);
 
   return (
     <View style={styles.container}>

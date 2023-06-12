@@ -1,16 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  FlatList,
+  TextInput,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import VillageRow from '../../components/VillageRow';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const VillagesScreen = ({navigation}) => {
   const [villages, setVillages] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getVillages();
   }, []);
 
   async function getVillages() {
+    setLoading(true);
     try {
       const response = await fetch('https://api.narutodb.xyz/village?limit=39');
       const jsonData = await response.json();
@@ -18,6 +27,7 @@ const VillagesScreen = ({navigation}) => {
     } catch (error) {
       console.log('Error fetching villages:', error);
     }
+    setLoading(false);
   }
 
   const navigateToVillageProfile = village => {
@@ -40,6 +50,10 @@ const VillagesScreen = ({navigation}) => {
   const filteredVillages = villages.filter(village =>
     village.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  if (loading) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <View style={styles.container}>

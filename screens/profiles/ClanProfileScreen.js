@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -14,10 +14,6 @@ const ClanProfileScreen = ({route, navigation}) => {
   const {clan} = route.params;
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleCharacterPress = character => {
-    navigation.navigate('CharacterProfileScreen', {character});
-  };
-
   const sortedCharacters = clan.characters.sort((a, b) =>
     a.name.localeCompare(b.name),
   );
@@ -25,6 +21,13 @@ const ClanProfileScreen = ({route, navigation}) => {
   const filteredCharacters = sortedCharacters.filter(character =>
     character.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  useEffect(() => {
+    // Set the title dynamically
+    navigation.setOptions({
+      title: `${clan.name} Clan`,
+    });
+  }, []);
 
   return (
     <View style={styles.container}>

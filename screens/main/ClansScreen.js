@@ -1,16 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  FlatList,
+  TextInput,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import ClanRow from '../../components/ClanRow';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const ClansScreen = ({navigation}) => {
   const [clans, setClans] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getClans();
   }, []);
 
   async function getClans() {
+    setLoading(true);
     try {
       const response = await fetch('https://api.narutodb.xyz/clan?limit=57');
       const jsonData = await response.json();
@@ -18,6 +27,7 @@ const ClansScreen = ({navigation}) => {
     } catch (error) {
       console.log('Error fetching clans:', error);
     }
+    setLoading(false);
   }
 
   const navigateToClanProfile = clan => {
@@ -35,6 +45,10 @@ const ClansScreen = ({navigation}) => {
   const filteredClans = clans.filter(clan =>
     clan.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  if (loading) {
+    return <LoadingIndicator />;
+  }
 
   return (
     <View style={styles.container}>
