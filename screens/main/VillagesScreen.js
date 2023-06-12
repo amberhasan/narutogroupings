@@ -47,8 +47,10 @@ const VillagesScreen = ({navigation}) => {
     setSearchQuery(text);
   };
 
-  const filteredVillages = villages.filter(village =>
-    village.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  const filteredVillages = villages.filter(
+    village =>
+      village.characters.length > 0 &&
+      village.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   if (loading) {

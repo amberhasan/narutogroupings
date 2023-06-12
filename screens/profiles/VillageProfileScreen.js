@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import CharacterRow from '../../components/CharacterRow';
 
 const VillageProfileScreen = ({route, navigation}) => {
   // Extract the village data from the route parameter
@@ -46,15 +47,12 @@ const VillageProfileScreen = ({route, navigation}) => {
         data={filteredCharacters}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.characterContainer}
-            onPress={() => handleCharacterPress(item)}>
-            <Image
-              source={{uri: item.images[0]}}
-              style={styles.characterImage}
-            />
-            <Text style={styles.characterName}>{item.name}</Text>
-          </TouchableOpacity>
+          <CharacterRow
+            character={item}
+            onPress={() => {
+              navigation.navigate('CharacterProfileScreen', {character: item});
+            }}
+          />
         )}
       />
     </View>
