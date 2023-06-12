@@ -34,8 +34,6 @@ const VillageProfileScreen = ({route, navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.villageName}>{village.name}</Text>
-
       <TextInput
         style={styles.searchInput}
         placeholder="Search characters"

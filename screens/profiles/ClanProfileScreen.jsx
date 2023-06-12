@@ -31,8 +31,6 @@ const ClanProfileScreen = ({route, navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.clanName}>{clan.name}</Text>
-
       <TextInput
         style={styles.searchInput}
         placeholder="Search characters"
