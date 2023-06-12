@@ -11,7 +11,7 @@ const CharacterProfileScreen = ({route}) => {
           source={
             character.images[0]
               ? {uri: character.images[0]}
-              : require('../../images/notavailable.png')
+              : require('../../assets/images/notavailable.png')
           }
           style={styles.characterImage}
         />

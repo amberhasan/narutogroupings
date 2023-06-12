@@ -5,7 +5,10 @@ const ClanRow = props => {
   const {name, symbol, description} = props.clan;
   return (
     <TouchableOpacity style={styles.clanItem} onPress={props.onPress}>
-      <Image source={require('../images/clan.png')} style={styles.clanImage} />
+      <Image
+        source={require('../assets/images/clan.png')}
+        style={styles.clanImage}
+      />
       <View style={styles.clanInfo}>
         <Text style={styles.clanName}>{name}</Text>
         <Text style={styles.clanDescription}>{description}</Text>

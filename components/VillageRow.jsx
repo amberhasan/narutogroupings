@@ -7,7 +7,7 @@ const VillageRow = props => {
   return (
     <TouchableOpacity style={styles.villageItem} onPress={props.onPress}>
       <Image
-        source={require('../images/village.png')}
+        source={require('../assets/images/village.png')}
         style={styles.villageImage}
       />
       <View style={styles.villageInfo}>

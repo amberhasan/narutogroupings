@@ -14,7 +14,9 @@ const CharacterRow = props => {
     <TouchableOpacity style={styles.characterItem} onPress={props.onPress}>
       <Image
         source={
-          images[0] ? {uri: images[0]} : require('../images/notavailable.png')
+          images[0]
+            ? {uri: images[0]}
+            : require('../assets/images/notavailable.png')
         }
         style={styles.characterImage}
       />

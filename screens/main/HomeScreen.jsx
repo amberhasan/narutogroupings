@@ -16,19 +16,19 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <HomeMenuItem
         title={'Characters'}
-        image={require('../../images/characters.png')}
+        image={require('../../assets/images/characters.png')}
         onPress={handlePress}
         linkScreenName={'CharactersScreen'}
       />
       <HomeMenuItem
         title={'Clans'}
-        image={require('../../images/clans.png')}
+        image={require('../../assets/images/clans.png')}
         onPress={handlePress}
         linkScreenName={'ClansScreen'}
       />
       <HomeMenuItem
         title={'Villages'}
-        image={require('../../images/villages.png')}
+        image={require('../../assets/images/villages.png')}
         onPress={handlePress}
         linkScreenName={'VillagesScreen'}
       />
@@ -42,6 +42,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFE4C4', // Orange background color
+  },
+  title: {
+    fontFamily: 'YourCustomFont',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
 });
 
