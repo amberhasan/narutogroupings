@@ -2,9 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import CharactersScreen from './CharactersScreen';
-import ClansScreen from './ClansScreen';
-import VillagesScreen from './VillagesScreen';
+import HomeMenuItem from '../../components/HomeMenuItem';
 
 // Home Screen
 const HomeScreen = () => {
@@ -16,33 +14,24 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.rowContainer}
-        onPress={() => handlePress('CharactersScreen')}>
-        <Image
-          source={require('../../images/characters.png')}
-          style={styles.image}
-        />
-        <Text style={styles.text}>Characters</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.rowContainer}
-        onPress={() => handlePress('ClansScreen')}>
-        <Image
-          source={require('../../images/clans.png')}
-          style={styles.image}
-        />
-        <Text style={styles.text}>Clans</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.rowContainer}
-        onPress={() => handlePress('VillagesScreen')}>
-        <Image
-          source={require('../../images/villages.png')}
-          style={styles.image}
-        />
-        <Text style={styles.text}>Villages</Text>
-      </TouchableOpacity>
+      <HomeMenuItem
+        title={'Characters'}
+        image={require('../../images/characters.png')}
+        onPress={handlePress}
+        linkScreenName={'CharactersScreen'}
+      />
+      <HomeMenuItem
+        title={'Clans'}
+        image={require('../../images/clans.png')}
+        onPress={handlePress}
+        linkScreenName={'ClansScreen'}
+      />
+      <HomeMenuItem
+        title={'Villages'}
+        image={require('../../images/villages.png')}
+        onPress={handlePress}
+        linkScreenName={'VillagesScreen'}
+      />
     </View>
   );
 };
@@ -53,25 +42,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFE4C4', // Orange background color
-  },
-  rowContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginVertical: 10,
-    backgroundColor: 'white', // White background color for boxes
-    borderWidth: 1,
-    borderColor: 'black',
-    padding: 10,
-    borderRadius: 5,
-  },
-  image: {
-    width: 250,
-    height: 120,
-    marginBottom: 10,
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
   },
 });
 
