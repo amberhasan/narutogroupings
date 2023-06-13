@@ -8,12 +8,10 @@ const useFetch = (url, category) => {
   async function getData() {
     try {
       setLoading(true);
-      const response = await fetch(
-        'https://api.narutodb.xyz/character?limit=1431',
-      );
+      const response = await fetch(url);
       const jsonData = await response.json();
-      console.log('jsonData ', jsonData);
-      console.log('jsonData[category] ', jsonData[category]);
+      // console.log('jsonData ', jsonData);
+      // console.log('jsonData[category] ', jsonData[category]);
 
       setData(jsonData[category]); // jsonData.characters
       setLoading(false);
