@@ -1,8 +1,11 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import Section from '../../components/Section';
+import ListItem from '../../components/ListItem';
 
 const CharacterProfileScreen = ({route}) => {
   const {character} = route.params;
+  console.log('character.debut.movie', character.debut.movie);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -20,91 +23,53 @@ const CharacterProfileScreen = ({route}) => {
           <Text style={styles.characterName}>{character.name}</Text>
         </View>
       </View>
-      {character.debut && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Debut</Text>
-          {character.debut.movie && (
-            <Text style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>
-                {character.debut.movie}
-              </Text>
-            </Text>
-          )}
-          {character.debut.novel && (
-            <Text style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>
-                {character.debut.novel}
-              </Text>
-            </Text>
-          )}
-          {character.debut.appearsIn && (
-            <Text style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>
-                {character.debut.appearsIn}
-              </Text>
-            </Text>
-          )}
-        </View>
-      )}
+
+      <View>
+        <Section title="Debut">
+          <View>
+            <ListItem text={character.debut.movie} />
+            <ListItem text={character.debut.novel} />
+            <ListItem text={character.debut.appearsIn} />
+          </View>
+        </Section>
+      </View>
+
       {character.jutsu && character.jutsu.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Jutsu</Text>
+        <Section title="Jutsu">
           {character.jutsu.map((jutsu, index) => (
-            <Text key={index} style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>{jutsu}</Text>
-            </Text>
+            <ListItem key={index} text={jutsu} />
           ))}
-        </View>
+        </Section>
       )}
+
       {character.personal && character.personal.species && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Personal</Text>
-          <Text style={styles.sectionText}>
-            <Text style={styles.bulletPoint}>•</Text>{' '}
-            <Text style={styles.sectionTextContent}>
-              {character.personal.species}
-            </Text>
-          </Text>
-        </View>
+        <Section title="Personal">
+          <ListItem text={character.personal.species} />
+        </Section>
       )}
+
       {character.uniqueTraits && character.uniqueTraits.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Unique Traits</Text>
+        <Section title="Unique Traits">
           {character.uniqueTraits.map((trait, index) => (
-            <Text key={index} style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>{trait}</Text>
-            </Text>
+            <ListItem key={index} text={trait} />
           ))}
-        </View>
+        </Section>
       )}
+
       {character.family && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Family</Text>
+        <Section title="Family">
           {Object.entries(character.family).map(([relation, name], index) => (
-            <Text key={index} style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>
-                {relation}: {name}
-              </Text>
-            </Text>
+            <ListItem key={index} text={`${relation}: ${name}`} />
           ))}
-        </View>
+        </Section>
       )}
+
       {character.natureType && character.natureType.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Nature Type</Text>
+        <Section title="Nature Type">
           {character.natureType.map((nature, index) => (
-            <Text key={index} style={styles.sectionText}>
-              <Text style={styles.bulletPoint}>•</Text>{' '}
-              <Text style={styles.sectionTextContent}>{nature}</Text>
-            </Text>
+            <ListItem key={index} text={nature} />
           ))}
-        </View>
+        </Section>
       )}
     </ScrollView>
   );
@@ -132,29 +97,6 @@ const styles = StyleSheet.create({
   characterName: {
     fontSize: 24,
     fontWeight: 'bold',
-  },
-  section: {
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  sectionText: {
-    fontSize: 14,
-    marginBottom: 5,
-  },
-  bulletPoint: {
-    fontSize: 14,
-    marginRight: 5,
-  },
-  sectionTextContent: {
-    fontSize: 14,
   },
 });
 

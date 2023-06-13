@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const ProfileSection = ({title, content}) => (
+const Section = ({title, children}) => (
   <View style={styles.section}>
     <Text style={styles.sectionTitle}>{title}</Text>
-    {content}
+    {children}
   </View>
 );
 
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileSection;
+export default Section;

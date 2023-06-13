@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 
-const ProfileSectionListItem = ({text}) => (
+const ListItem = ({text}) => (
   <Text style={styles.sectionText}>
     <Text style={styles.bulletPoint}>•</Text>{' '}
     <Text style={styles.sectionTextContent}>{text}</Text>
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileSectionListItem;
+export default ListItem;

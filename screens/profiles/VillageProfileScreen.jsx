@@ -15,10 +15,6 @@ const VillageProfileScreen = ({route, navigation}) => {
   const {village} = route.params;
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleCharacterPress = character => {
-    navigation.navigate('CharacterProfileScreen', {character});
-  };
-
   const sortedCharacters = village.characters.sort((a, b) =>
     a.name.localeCompare(b.name),
   );
