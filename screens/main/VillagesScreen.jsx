@@ -8,28 +8,14 @@ import {
 } from 'react-native';
 import VillageRow from '../../components/VillageRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import useFetch from '../../hooks/useFetch';
 
 const VillagesScreen = ({navigation}) => {
-  const [villages, setVillages] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    getVillages();
-  }, []);
-
-  async function getVillages() {
-    setLoading(true);
-    try {
-      const response = await fetch('https://api.narutodb.xyz/village?limit=39');
-      const jsonData = await response.json();
-      setVillages(jsonData.villages);
-    } catch (error) {
-      console.log('Error fetching villages:', error);
-    }
-    setLoading(false);
-  }
-
+  const {data: villages, loading} = useFetch(
+    'https://api.narutodb.xyz/village?limit=39',
+    'villages',
+  );
   const navigateToVillageProfile = village => {
     navigation.navigate('VillageProfileScreen', {village});
   };

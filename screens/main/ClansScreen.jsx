@@ -8,27 +8,14 @@ import {
 } from 'react-native';
 import ClanRow from '../../components/ClanRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import useFetch from '../../hooks/useFetch';
 
 const ClansScreen = ({navigation}) => {
-  const [clans, setClans] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    getClans();
-  }, []);
-
-  async function getClans() {
-    setLoading(true);
-    try {
-      const response = await fetch('https://api.narutodb.xyz/clan?limit=57');
-      const jsonData = await response.json();
-      setClans(jsonData.clans);
-    } catch (error) {
-      console.log('Error fetching clans:', error);
-    }
-    setLoading(false);
-  }
+  const {data: clans, loading} = useFetch(
+    'https://api.narutodb.xyz/clan?limit=57',
+    'clans',
+  );
 
   const navigateToClanProfile = clan => {
     navigation.navigate('ClanProfileScreen', {clan});
