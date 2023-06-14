@@ -93,12 +93,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
   },
-  characterImage: {
-    width: 80,
-    height: 80,
-    marginRight: 10,
-    borderRadius: 5,
-  },
   characterInfo: {
     flex: 1,
   },
