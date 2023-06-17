@@ -9,6 +9,7 @@ import HomeScreen from './screens/main/HomeScreen';
 import CharacterProfileScreen from './screens/profiles/CharacterProfileScreen';
 import ClanProfileScreen from './screens/profiles/ClanProfileScreen';
 import VillageProfileScreen from './screens/profiles/VillageProfileScreen';
+import ListScreen from './screens/main/ListScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,25 @@ export default function App() {
           component={CharactersScreen}
           options={props => ({
             headerTitle: `Characters`,
+            headerRight: () => (
+              <View style={{flexDirection: 'row'}}>
+                <View>
+                  <Button
+                    title="Home"
+                    onPress={() => {
+                      props.navigation.navigate('Home');
+                    }}
+                  />
+                </View>
+              </View>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="ListScreen"
+          component={ListScreen}
+          options={props => ({
+            headerTitle: `Clans`,
             headerRight: () => (
               <View style={{flexDirection: 'row'}}>
                 <View>

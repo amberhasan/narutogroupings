@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 const CharacterRow = props => {
-  const {name, images, gender, rank, ninjaRegistration} = props.character;
+  const {name, images} = props.character;
   return (
     <TouchableOpacity style={styles.characterItem} onPress={props.onPress}>
       <Image
