@@ -5,7 +5,6 @@ import ListItem from '../../components/ListItem';
 
 const CharacterProfileScreen = ({route}) => {
   const {character} = route.params;
-  console.log('character.debut.movie', character.debut.movie);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

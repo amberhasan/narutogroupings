@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   image: {
-    width: 250,
-    height: 120,
+    width: 180, // Adjust the width as needed
+    height: 100, // Adjust the height as needed
     marginBottom: 10,
   },
   text: {
-    fontSize: 20,
+    fontSize: 18, // Adjust the font size as needed
     fontWeight: 'bold',
   },
 });
