@@ -11,7 +11,7 @@ import ClanProfileScreen from './screens/profiles/ClanProfileScreen';
 import VillageProfileScreen from './screens/profiles/VillageProfileScreen';
 import KekkeiGenkaiProfileScreen from './screens/profiles/KekkeiGenkaiProfileScreen';
 import TeamsProfileScreen from './screens/profiles/TeamsProfileScreen';
-import TailedBeastsProfileScreen from './screens/profiles/TailedBeastsProfileScreen';
+import TailedBeastProfileScreen from './screens/profiles/TailedBeastProfileScreen';
 import AkatsukiProfileScreen from './screens/profiles/AkatsukiProfileScreen';
 import KaraProfileScreen from './screens/profiles/KaraProfileScreen';
 
@@ -94,9 +94,9 @@ export default function App() {
           options={{headerTitle: 'Teams Profile'}}
         />
         <Stack.Screen
-          name="TailedBeastsProfileScreen"
-          component={TailedBeastsProfileScreen}
-          options={{headerTitle: 'Tailed Beasts Profile'}}
+          name="TailedBeastProfileScreen"
+          component={TailedBeastProfileScreen}
+          options={{headerTitle: 'Tailed Beast Profile'}}
         />
         <Stack.Screen
           name="AkatsukiProfileScreen"

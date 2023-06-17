@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 const Section = ({title, children}) => (
   <View style={styles.section}>
-    <Text style={styles.sectionTitle}>{title}</Text>
+    {title ? <Text style={styles.sectionTitle}>{title}</Text> : null}
     {children}
   </View>
 );

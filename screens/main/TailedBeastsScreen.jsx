@@ -8,50 +8,39 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
-import CharacterRow from '../../components/CharacterRow';
+import TailedBeastRow from '../../components/TailedBeastRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import useFetch from '../../hooks/useFetch';
 
 const TailedBeastsScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
-  const [filteredCharacters, setFilteredCharacters] = useState([]);
-  const {data: characters, loading} = useFetch(
-    'https://api.narutodb.xyz/character?limit=1431',
-    'characters',
+  const [filteredTailedBeasts, setFilteredTailedBeasts] = useState([]);
+  const {data: tailedBeasts, loading} = useFetch(
+    'https://api.narutodb.xyz/tailed-beast?limit=10',
+    'tailedBeasts',
   );
 
   useEffect(() => {
-    filterCharacters();
-  }, [characters, searchText]);
+    filterTailedBeasts();
+  }, [tailedBeasts, searchText]);
 
-  const filterCharacters = () => {
-    const filtered = characters.filter(character =>
-      character.name.toLowerCase().includes(searchText.toLowerCase()),
+  const filterTailedBeasts = () => {
+    const filtered = tailedBeasts.filter(tailedBeast =>
+      tailedBeast.name.toLowerCase().includes(searchText.toLowerCase()),
     );
-    setFilteredCharacters(filtered);
+    setFilteredTailedBeasts(filtered);
   };
 
   if (loading) {
     return <LoadingIndicator />;
   }
 
-  const renderCharacterItem = ({item}) => {
-    const hasContent =
-      (item.debut &&
-        (item.debut.movie || item.debut.novel || item.debut.appearsIn)) ||
-      (item.jutsu && item.jutsu.length > 0) ||
-      (item.personal && item.personal.species) ||
-      (item.uniqueTraits && item.uniqueTraits.length > 0);
-
-    if (!hasContent) {
-      return null;
-    }
-
+  const renderTailedBeastItem = ({item}) => {
     return (
-      <CharacterRow
-        character={item}
+      <TailedBeastRow
+        tailedBeast={item}
         onPress={() => {
-          navigation.navigate('CharacterProfileScreen', {character: item});
+          navigation.navigate('TailedBeastProfileScreen', {tailedBeast: item});
         }}
       />
     );
@@ -61,11 +50,14 @@ const TailedBeastsScreen = ({navigation}) => {
     <View style={styles.container}>
       <TextInput
         style={styles.searchBar}
-        placeholder="Search characters..."
+        placeholder="Search tailed beasts..."
         value={searchText}
         onChangeText={setSearchText}
       />
-      <FlatList data={filteredCharacters} renderItem={renderCharacterItem} />
+      <FlatList
+        data={filteredTailedBeasts}
+        renderItem={renderTailedBeastItem}
+      />
     </View>
   );
 };
@@ -83,7 +75,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
-  characterItem: {
+  tailedBeastItem: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
@@ -93,15 +85,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
   },
-  characterInfo: {
+  tailedBeastInfo: {
     flex: 1,
   },
-  characterName: {
+  tailedBeastName: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  characterDetails: {
+  tailedBeastDetails: {
     fontSize: 14,
     marginBottom: 3,
   },

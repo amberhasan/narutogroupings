@@ -3,8 +3,14 @@ import {Text, StyleSheet} from 'react-native';
 
 const ListItem = ({text}) => (
   <Text style={styles.sectionText}>
-    <Text style={styles.bulletPoint}>•</Text>{' '}
-    <Text style={styles.sectionTextContent}>{text}</Text>
+    {text ? (
+      <>
+        <Text style={styles.bulletPoint}>•</Text>{' '}
+        <Text style={styles.sectionTextContent}>{text}</Text>
+      </>
+    ) : (
+      <Text style={styles.sectionTextContent}>{text}</Text>
+    )}
   </Text>
 );
 
