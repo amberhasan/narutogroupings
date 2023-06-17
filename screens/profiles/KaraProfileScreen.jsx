@@ -8,24 +8,24 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import CharacterRow from '../../components/CharacterRow';
+import KaraRow from '../../components/CharacterRow';
 
-const ClanProfileScreen = ({route, navigation}) => {
-  const {clan} = route.params;
+const KaraProfileScreen = ({route, navigation}) => {
+  const {kara} = route.params;
   const [searchQuery, setSearchQuery] = useState('');
 
-  const sortedCharacters = clan.characters.sort((a, b) =>
+  const sortedKara = kara.characters.sort((a, b) =>
     a.name.localeCompare(b.name),
   );
 
-  const filteredCharacters = sortedCharacters.filter(character =>
-    character.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  const filteredKara = sortedKara.filter(kara =>
+    kara.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   useEffect(() => {
     // Set the title dynamically
     navigation.setOptions({
-      title: `${clan.name} Clan`,
+      title: `${kara.name} Clan`,
     });
   }, []);
 
@@ -33,18 +33,18 @@ const ClanProfileScreen = ({route, navigation}) => {
     <View style={styles.container}>
       <TextInput
         style={styles.searchInput}
-        placeholder="Search characters"
+        placeholder="Search kara"
         value={searchQuery}
         onChangeText={text => setSearchQuery(text)}
       />
 
       <FlatList
-        data={filteredCharacters}
+        data={filteredKara}
         renderItem={({item}) => (
           <CharacterRow
             character={item}
             onPress={() => {
-              navigation.navigate('CharacterProfileScreen', {character: item});
+              navigation.navigate('CharacterProfileScreen', {kara: item});
             }}
           />
         )}
@@ -71,27 +71,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 10,
   },
-  characterContainer: {
-    marginBottom: 10,
-  },
-  characterBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-  },
-  characterImage: {
-    width: 80,
-    height: 80,
-    marginRight: 10,
-    borderRadius: 5,
-  },
-  characterName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
 });
 
-export default ClanProfileScreen;
+export default KaraProfileScreen;

@@ -8,23 +8,23 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const TailedBeastRow = props => {
-  const {name} = props.tailed_beast;
+const KaraRow = props => {
+  const {name} = props.kara;
   return (
-    <TouchableOpacity style={styles.tailedBeastItem} onPress={props.onPress}>
+    <TouchableOpacity style={styles.karaItem} onPress={props.onPress}>
       <Image
-        source={require('../assets/images/tailed_beasts.png')}
-        style={styles.tailedBeastImage}
+        source={require('../assets/images/kara.png')}
+        style={styles.karaImage}
       />
-      <View style={styles.tailedBeastInfo}>
-        <Text style={styles.tailedBeastName}>{name}</Text>
+      <View style={styles.karaInfo}>
+        <Text style={styles.karaName}>{name}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  tailedBeastItem: {
+  karaItem: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
@@ -34,20 +34,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
   },
-  tailedBeastImage: {
+  karaImage: {
     width: 80,
     height: 80,
     marginRight: 10,
     borderRadius: 5,
   },
-  tailedBeastInfo: {
+  karaInfo: {
     flex: 1,
   },
-  tailedBeastName: {
+  karaName: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 5,
   },
 });
 
-export default KekkeiGenkaiRow;
+export default KaraRow;

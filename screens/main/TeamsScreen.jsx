@@ -8,50 +8,39 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
-import CharacterRow from '../../components/CharacterRow';
+import TeamRow from '../../components/TeamRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import useFetch from '../../hooks/useFetch';
 
 const TeamsScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
-  const [filteredCharacters, setFilteredCharacters] = useState([]);
-  const {data: characters, loading} = useFetch(
-    'https://api.narutodb.xyz/character?limit=1431',
-    'characters',
+  const [filteredTeams, setFilteredTeams] = useState([]);
+  const {data: teams, loading} = useFetch(
+    'https://api.narutodb.xyz/team?limit=191',
+    'teams',
   );
 
   useEffect(() => {
-    filterCharacters();
-  }, [characters, searchText]);
+    filterTeams();
+  }, [teams, searchText]);
 
-  const filterCharacters = () => {
-    const filtered = characters.filter(character =>
-      character.name.toLowerCase().includes(searchText.toLowerCase()),
+  const filterTeams = () => {
+    const filtered = teams.filter(team =>
+      team.name.toLowerCase().includes(searchText.toLowerCase()),
     );
-    setFilteredCharacters(filtered);
+    setFilteredTeams(filtered);
   };
 
   if (loading) {
     return <LoadingIndicator />;
   }
 
-  const renderCharacterItem = ({item}) => {
-    const hasContent =
-      (item.debut &&
-        (item.debut.movie || item.debut.novel || item.debut.appearsIn)) ||
-      (item.jutsu && item.jutsu.length > 0) ||
-      (item.personal && item.personal.species) ||
-      (item.uniqueTraits && item.uniqueTraits.length > 0);
-
-    if (!hasContent) {
-      return null;
-    }
-
+  const renderTeamItem = ({item}) => {
     return (
-      <CharacterRow
-        character={item}
+      <TeamRow
+        team={item}
         onPress={() => {
-          navigation.navigate('CharacterProfileScreen', {character: item});
+          navigation.navigate('TeamProfileScreen', {team: item});
         }}
       />
     );
@@ -61,11 +50,11 @@ const TeamsScreen = ({navigation}) => {
     <View style={styles.container}>
       <TextInput
         style={styles.searchBar}
-        placeholder="Search characters..."
+        placeholder="Search teams..."
         value={searchText}
         onChangeText={setSearchText}
       />
-      <FlatList data={filteredCharacters} renderItem={renderCharacterItem} />
+      <FlatList data={filteredTeams} renderItem={renderTeamItem} />
     </View>
   );
 };

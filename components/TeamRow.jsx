@@ -8,23 +8,23 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const TailedBeastRow = props => {
-  const {name} = props.tailed_beast;
+const TeamRow = props => {
+  const {name} = props.team;
   return (
-    <TouchableOpacity style={styles.tailedBeastItem} onPress={props.onPress}>
+    <TouchableOpacity style={styles.teamItem} onPress={props.onPress}>
       <Image
-        source={require('../assets/images/tailed_beasts.png')}
-        style={styles.tailedBeastImage}
+        source={require('../assets/images/teams.png')}
+        style={styles.teamImage}
       />
-      <View style={styles.tailedBeastInfo}>
-        <Text style={styles.tailedBeastName}>{name}</Text>
+      <View style={styles.teamInfo}>
+        <Text style={styles.teamName}>{name}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  tailedBeastItem: {
+  teamItem: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
@@ -34,20 +34,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
   },
-  tailedBeastImage: {
+  teamImage: {
     width: 80,
     height: 80,
     marginRight: 10,
     borderRadius: 5,
   },
-  tailedBeastInfo: {
+  teamInfo: {
     flex: 1,
   },
-  tailedBeastName: {
+  teamName: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 5,
   },
 });
 
-export default KekkeiGenkaiRow;
+export default TeamRow;

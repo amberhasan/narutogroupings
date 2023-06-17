@@ -8,26 +8,27 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import TeamRow from '../../components/TeamRow';
 import CharacterRow from '../../components/CharacterRow';
 
-const ClanProfileScreen = ({route, navigation}) => {
-  const {clan} = route.params;
+const TeamProfileScreen = ({route, navigation}) => {
+  const {team} = route.params;
   const [searchQuery, setSearchQuery] = useState('');
 
-  const sortedCharacters = clan.characters.sort((a, b) =>
+  useEffect(() => {
+    // Set the title dynamically
+    navigation.setOptions({
+      title: `${team.name}`,
+    });
+  }, []);
+
+  const sortedCharacters = team.characters.sort((a, b) =>
     a.name.localeCompare(b.name),
   );
 
   const filteredCharacters = sortedCharacters.filter(character =>
     character.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
-
-  useEffect(() => {
-    // Set the title dynamically
-    navigation.setOptions({
-      title: `${clan.name} Clan`,
-    });
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -58,11 +59,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
-  clanName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
   searchInput: {
     height: 40,
     borderWidth: 1,
@@ -71,10 +67,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 10,
   },
-  characterContainer: {
+  teamContainer: {
     marginBottom: 10,
   },
-  characterBox: {
+  teamBox: {
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
@@ -82,16 +78,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
   },
-  characterImage: {
+  teamImage: {
     width: 80,
     height: 80,
     marginRight: 10,
     borderRadius: 5,
   },
-  characterName: {
+  teamName: {
     fontSize: 18,
     fontWeight: 'bold',
   },
 });
 
-export default ClanProfileScreen;
+export default TeamProfileScreen;
