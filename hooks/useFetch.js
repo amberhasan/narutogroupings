@@ -10,12 +10,13 @@ const useFetch = (url, category) => {
       setLoading(true);
       const response = await fetch(url);
       const jsonData = await response.json();
+      console.log('jsonData', jsonData);
       setData(jsonData[category]); // jsonData.characters
       setLoading(false);
     } catch (error) {
       setLoading(false);
       setError(error);
-      console.log('Error fetching characters:', error);
+      console.log('Error fetching data:', error);
     }
   }
 

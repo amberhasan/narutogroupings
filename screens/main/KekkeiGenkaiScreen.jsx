@@ -8,50 +8,45 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
-import CharacterRow from '../../components/CharacterRow';
+import KekkeiGenkaiRow from '../../components/KekkeiGenkaiRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import useFetch from '../../hooks/useFetch';
 
 const KekkeiGenkaiScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
-  const [filteredCharacters, setFilteredCharacters] = useState([]);
-  const {data: characters, loading} = useFetch(
-    'https://api.narutodb.xyz/character?limit=1431',
-    'characters',
+  const [filteredKekkeiGenkai, setFilteredKekkeiGenkai] = useState([]);
+  const {data: kekkei_genkai, loading} = useFetch(
+    'https://api.narutodb.xyz/kekkei-genkai?limit=39',
+    'kekkeigenkai',
   );
 
   useEffect(() => {
-    filterCharacters();
-  }, [characters, searchText]);
+    if (kekkei_genkai) {
+      filterKekkeiGenkai();
+    }
+  }, [kekkei_genkai, searchText]);
 
-  const filterCharacters = () => {
-    const filtered = characters.filter(character =>
-      character.name.toLowerCase().includes(searchText.toLowerCase()),
+  const filterKekkeiGenkai = () => {
+    console.log('filtered', kekkei_genkai);
+
+    const filtered = kekkei_genkai.filter(kekkei_genkai =>
+      kekkei_genkai.name.toLowerCase().includes(searchText.toLowerCase()),
     );
-    setFilteredCharacters(filtered);
+    setFilteredKekkeiGenkai(filtered);
   };
 
   if (loading) {
     return <LoadingIndicator />;
   }
 
-  const renderCharacterItem = ({item}) => {
-    const hasContent =
-      (item.debut &&
-        (item.debut.movie || item.debut.novel || item.debut.appearsIn)) ||
-      (item.jutsu && item.jutsu.length > 0) ||
-      (item.personal && item.personal.species) ||
-      (item.uniqueTraits && item.uniqueTraits.length > 0);
-
-    if (!hasContent) {
-      return null;
-    }
-
+  const renderKekkeiGenkaiItem = ({item}) => {
     return (
-      <CharacterRow
-        character={item}
+      <KekkeiGenkaiRow
+        kekkei_genkai={item}
         onPress={() => {
-          navigation.navigate('CharacterProfileScreen', {character: item});
+          navigation.navigate('KekkeiGenkaiProfileScreen', {
+            kekkei_genkai: item,
+          });
         }}
       />
     );
@@ -61,11 +56,14 @@ const KekkeiGenkaiScreen = ({navigation}) => {
     <View style={styles.container}>
       <TextInput
         style={styles.searchBar}
-        placeholder="Search characters..."
+        placeholder="Search kekkei genkai..."
         value={searchText}
         onChangeText={setSearchText}
       />
-      <FlatList data={filteredCharacters} renderItem={renderCharacterItem} />
+      <FlatList
+        data={filteredKekkeiGenkai}
+        renderItem={renderKekkeiGenkaiItem}
+      />
     </View>
   );
 };
@@ -82,28 +80,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
     paddingHorizontal: 10,
-  },
-  characterItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 10,
-    padding: 10,
-  },
-  characterInfo: {
-    flex: 1,
-  },
-  characterName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  characterDetails: {
-    fontSize: 14,
-    marginBottom: 3,
   },
 });
 
