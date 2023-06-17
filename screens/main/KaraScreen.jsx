@@ -12,7 +12,7 @@ import CharacterRow from '../../components/CharacterRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import useFetch from '../../hooks/useFetch';
 
-const CharactersScreen = ({navigation}) => {
+const KaraScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const {data: characters, loading} = useFetch(
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CharactersScreen;
+export default KaraScreen;
