@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   menuItem: {
-    flex: 1,
+    flex: 0.5, // Set flex to 0.5 to make two items appear on each row
     padding: 8,
     borderRadius: 8,
     backgroundColor: '#FFFFFF',
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   menuItemImage: {
-    width: Dimensions.get('window').width / 2 - 24,
-    height: Dimensions.get('window').width / 2 - 24,
+    width: Dimensions.get('window').width / 2 - 40, // Adjust the width calculation to leave some space between items
+    height: Dimensions.get('window').width / 2 - 40, // Adjust the height calculation to maintain aspect ratio
     marginBottom: 10,
   },
   title: {

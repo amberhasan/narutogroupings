@@ -27,8 +27,6 @@ const KekkeiGenkaiScreen = ({navigation}) => {
   }, [kekkei_genkai, searchText]);
 
   const filterKekkeiGenkai = () => {
-    console.log('filtered', kekkei_genkai);
-
     const filtered = kekkei_genkai.filter(kekkei_genkai =>
       kekkei_genkai.name.toLowerCase().includes(searchText.toLowerCase()),
     );

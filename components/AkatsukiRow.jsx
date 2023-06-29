@@ -8,23 +8,24 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const TailedBeastRow = props => {
-  const {name} = props.tailed_beast;
+const AkatsukiRow = props => {
+  console.log('props', props);
+  const {name} = props.akatsuki;
   return (
-    <TouchableOpacity style={styles.tailedBeastItem} onPress={props.onPress}>
+    <TouchableOpacity style={styles.akatsukiItem} onPress={props.onPress}>
       <Image
-        source={require('../assets/images/tailed_beasts.png')}
-        style={styles.tailedBeastImage}
+        source={require('../assets/images/akatsuki.png')}
+        style={styles.akatsukiImage}
       />
-      <View style={styles.tailedBeastInfo}>
-        <Text style={styles.tailedBeastName}>{name}</Text>
+      <View style={styles.akatsukiInfo}>
+        <Text style={styles.akatsukiName}>{name}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  tailedBeastItem: {
+  akatsukiItem: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
@@ -34,20 +35,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
   },
-  tailedBeastImage: {
+  akatsukiImage: {
     width: 80,
     height: 80,
     marginRight: 10,
     borderRadius: 5,
   },
-  tailedBeastInfo: {
+  akatsukiInfo: {
     flex: 1,
   },
-  tailedBeastName: {
+  akatsukiName: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 5,
   },
 });
 
-export default KekkeiGenkaiRow;
+export default AkatsukiRow;

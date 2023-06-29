@@ -1,97 +1,95 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
-import CharacterRow from '../../components/CharacterRow';
+import React, {memo} from 'react';
+import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import Section from '../../components/Section';
+import ListItem from '../../components/ListItem';
 
-const ClanProfileScreen = ({route, navigation}) => {
-  const {clan} = route.params;
-  const [searchQuery, setSearchQuery] = useState('');
+const MemoizedListItem = memo(({text}) => {
+  return <Text>{text}</Text>;
+});
 
-  const sortedCharacters = clan.characters.sort((a, b) =>
-    a.name.localeCompare(b.name),
-  );
-
-  const filteredCharacters = sortedCharacters.filter(character =>
-    character.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
-  useEffect(() => {
-    // Set the title dynamically
-    navigation.setOptions({
-      title: `${clan.name} Clan`,
-    });
-  }, []);
+const AkatsukiProfileScreen = ({route}) => {
+  const {akatsuki} = route.params;
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search characters"
-        value={searchQuery}
-        onChangeText={text => setSearchQuery(text)}
-      />
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
+        <Image
+          source={
+            akatsuki.images && akatsuki.images[0]
+              ? {uri: akatsuki.images[0]}
+              : require('../../assets/images/notavailable.png')
+          }
+          style={styles.akatsukiImage}
+        />
 
-      <FlatList
-        data={filteredCharacters}
-        renderItem={({item}) => (
-          <CharacterRow
-            character={item}
-            onPress={() => {
-              navigation.navigate('CharacterProfileScreen', {character: item});
-            }}
-          />
-        )}
-      />
-    </View>
+        <View style={styles.akatsukiInfo}>
+          <Text style={styles.akatsukiName}>{akatsuki.name}</Text>
+        </View>
+      </View>
+
+      <View>
+        <Section title="Debut">
+          <View>
+            <MemoizedListItem text={akatsuki.debut?.movie || ''} />
+            <MemoizedListItem text={akatsuki.debut?.novel || ''} />
+            <MemoizedListItem text={akatsuki.debut?.manga || ''} />
+            <MemoizedListItem text={akatsuki.debut?.anime || ''} />
+            <MemoizedListItem text={akatsuki.debut?.game || ''} />
+            <MemoizedListItem text={akatsuki.debut?.appearsIn || ''} />
+          </View>
+        </Section>
+      </View>
+
+      {akatsuki.jutsu && akatsuki.jutsu.length > 0 && (
+        <Section title="Jutsu">
+          {akatsuki.jutsu.map((jutsu, index) => (
+            <MemoizedListItem key={index} text={jutsu} />
+          ))}
+        </Section>
+      )}
+
+      {akatsuki.family && (
+        <Section title="Family">
+          {Object.entries(akatsuki.family).map(([relation, name], index) => (
+            <MemoizedListItem key={index} text={`${relation}: ${name}`} />
+          ))}
+        </Section>
+      )}
+
+      {akatsuki.natureType && akatsuki.natureType.length > 0 && (
+        <Section title="Nature Type">
+          {akatsuki.natureType.map((nature, index) => (
+            <MemoizedListItem key={index} text={nature} />
+          ))}
+        </Section>
+      )}
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 10,
+    flexGrow: 1,
+    padding: 20,
   },
-  clanName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  searchInput: {
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  characterContainer: {
-    marginBottom: 10,
-  },
-  characterBox: {
+  header: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
+    marginBottom: 20,
   },
-  characterImage: {
-    width: 80,
-    height: 80,
+  akatsukiImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
     marginRight: 10,
-    borderRadius: 5,
   },
-  characterName: {
-    fontSize: 18,
+  akatsukiInfo: {
+    flex: 1,
+  },
+  akatsukiName: {
+    fontSize: 24,
     fontWeight: 'bold',
   },
 });
 
-export default ClanProfileScreen;
+export default AkatsukiProfileScreen;
