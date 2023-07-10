@@ -19,19 +19,21 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     marginVertical: 10,
-    backgroundColor: 'white', // White background color for boxes
+    backgroundColor: 'white',
     borderWidth: 1,
     borderColor: 'black',
     padding: 10,
     borderRadius: 5,
   },
   image: {
-    width: 180, // Adjust the width as needed
-    height: 100, // Adjust the height as needed
+    width: 140,
+    height: 60,
     marginBottom: 10,
+    borderWidth: 1, // Add border width
+    borderColor: 'black', // Add border color
   },
   text: {
-    fontSize: 18, // Adjust the font size as needed
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });

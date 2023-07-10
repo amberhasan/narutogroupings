@@ -36,8 +36,6 @@ const AkatsukiScreen = ({navigation}) => {
   }
 
   const renderAkatsukiItem = ({item}) => {
-    console.log('item', item);
-
     return (
       <AkatsukiRow
         akatsuki={item}

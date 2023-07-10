@@ -9,6 +9,7 @@ const MemoizedListItem = memo(({text}) => {
 
 const AkatsukiProfileScreen = ({route}) => {
   const {akatsuki} = route.params;
+  console.log('profile screen', akatsuki);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -26,7 +27,7 @@ const AkatsukiProfileScreen = ({route}) => {
           <Text style={styles.akatsukiName}>{akatsuki.name}</Text>
         </View>
       </View>
-
+      {/* 
       <View>
         <Section title="Debut">
           <View>
@@ -38,9 +39,9 @@ const AkatsukiProfileScreen = ({route}) => {
             <MemoizedListItem text={akatsuki.debut?.appearsIn || ''} />
           </View>
         </Section>
-      </View>
+      </View> */}
 
-      {akatsuki.jutsu && akatsuki.jutsu.length > 0 && (
+      {/* {akatsuki.jutsu && akatsuki.jutsu.length > 0 && (
         <Section title="Jutsu">
           {akatsuki.jutsu.map((jutsu, index) => (
             <MemoizedListItem key={index} text={jutsu} />
@@ -48,7 +49,7 @@ const AkatsukiProfileScreen = ({route}) => {
         </Section>
       )}
 
-      {akatsuki.family && (
+      {akatsuki.family && Object.keys(akatsuki.family).length > 0 && (
         <Section title="Family">
           {Object.entries(akatsuki.family).map(([relation, name], index) => (
             <MemoizedListItem key={index} text={`${relation}: ${name}`} />
@@ -62,7 +63,7 @@ const AkatsukiProfileScreen = ({route}) => {
             <MemoizedListItem key={index} text={nature} />
           ))}
         </Section>
-      )}
+      )} */}
     </ScrollView>
   );
 };
