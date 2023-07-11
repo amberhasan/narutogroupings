@@ -15,7 +15,6 @@ const useFetch = (url, category) => {
     } catch (error) {
       setLoading(false);
       setError(error);
-      console.log('Error fetching data:', error);
     }
   }
 

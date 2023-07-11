@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 const AkatsukiRow = props => {
-  console.log('props', props);
   const {name} = props.akatsuki;
   return (
     <TouchableOpacity style={styles.akatsukiItem} onPress={props.onPress}>

@@ -41,7 +41,7 @@ const AkatsukiScreen = ({navigation}) => {
         akatsuki={item}
         onPress={() => {
           navigation.navigate('AkatsukiProfileScreen', {
-            akatsuki,
+            akatsuki: item,
           });
         }}
       />
