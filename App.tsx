@@ -20,6 +20,9 @@ import TeamsScreen from './screens/main/TeamsScreen';
 import TailedBeastsScreen from './screens/main/TailedBeastsScreen';
 import AkatsukiScreen from './screens/main/AkatsukiScreen';
 import KaraScreen from './screens/main/KaraScreen';
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
 
 const Stack = createNativeStackNavigator();
 
