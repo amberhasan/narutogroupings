@@ -16,7 +16,7 @@ const KekkeiGenkaiScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [filteredKekkeiGenkai, setFilteredKekkeiGenkai] = useState([]);
   const {data: kekkei_genkai, loading} = useFetch(
-    'https://api.narutodb.xyz/kekkei-genkai?limit=39',
+    'https://narutodb.xyz/api/kekkei-genkai?limit=39',
     'kekkeigenkai',
   );
 

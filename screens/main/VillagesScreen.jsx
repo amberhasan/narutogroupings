@@ -13,7 +13,7 @@ import useFetch from '../../hooks/useFetch';
 const VillagesScreen = ({navigation}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const {data: villages, loading} = useFetch(
-    'https://api.narutodb.xyz/village?limit=39',
+    'https://narutodb.xyz/api/village?limit=39',
     'villages',
   );
   const navigateToVillageProfile = village => {

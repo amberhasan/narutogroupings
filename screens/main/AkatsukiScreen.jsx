@@ -16,7 +16,7 @@ const AkatsukiScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [filteredAkatsuki, setFilteredAkatsuki] = useState([]);
   const {data: akatsuki, loading} = useFetch(
-    'https://api.narutodb.xyz/akatsuki?limit=44',
+    'https://narutodb.xyz/api/akatsuki?limit=44',
     'akatsuki',
   );
 

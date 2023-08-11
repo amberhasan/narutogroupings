@@ -13,7 +13,7 @@ import useFetch from '../../hooks/useFetch';
 const ClansScreen = ({navigation}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const {data: clans, loading} = useFetch(
-    'https://api.narutodb.xyz/clan?limit=57',
+    'https://narutodb.xyz/api/clan?limit=57',
     'clans',
   );
 
