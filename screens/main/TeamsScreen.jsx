@@ -16,7 +16,7 @@ const TeamsScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [filteredTeams, setFilteredTeams] = useState([]);
   const {data: teams, loading} = useFetch(
-    'https://api.narutodb.xyz/team?limit=191',
+    'https://narutodb.xyz/api/team?limit=191',
     'teams',
   );
 
