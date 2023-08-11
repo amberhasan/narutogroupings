@@ -16,7 +16,7 @@ const CharactersScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const {data: characters, loading} = useFetch(
-    'https://api.narutodb.xyz/character?limit=1431',
+    'https://narutodb.xyz/api/character?limit=1431',
     'characters',
   );
 

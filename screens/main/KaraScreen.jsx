@@ -16,7 +16,7 @@ const KaraScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [filteredKara, setFilteredKara] = useState([]);
   const {data: kara, loading} = useFetch(
-    'https://api.narutodb.xyz/kara?limit=32',
+    'https://narutodb.xyz/api/kara?limit=32',
     'kara',
   );
 
