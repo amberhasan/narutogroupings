@@ -16,7 +16,7 @@ const TailedBeastsScreen = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [filteredTailedBeasts, setFilteredTailedBeasts] = useState([]);
   const {data: tailedBeasts, loading} = useFetch(
-    'https://api.narutodb.xyz/tailed-beast?limit=10',
+    'https://narutodb.xyz/api/tailed-beast?limit=10',
     'tailedBeasts',
   );
 

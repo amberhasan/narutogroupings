@@ -17,7 +17,7 @@ const KaraScreen = ({navigation}) => {
   const [filteredKara, setFilteredKara] = useState([]);
   const {data: kara, loading} = useFetch(
     'https://narutodb.xyz/api/kara?limit=32',
-    'kara',
+    'clans',
   );
 
   useEffect(() => {
