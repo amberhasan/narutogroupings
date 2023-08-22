@@ -1,37 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+// View
+import React from 'react';
+import {View, TextInput, FlatList, StyleSheet} from 'react-native';
 import CharacterRow from '../../components/CharacterRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import useFetch from '../../hooks/useFetch';
+import useCharactersViewModel from '../../hooks/useCharactersViewModel';
 
 const CharactersScreen = ({navigation}) => {
-  const [searchText, setSearchText] = useState('');
-  const [filteredCharacters, setFilteredCharacters] = useState([]);
-  const {data: characters, loading} = useFetch(
-    'https://narutodb.xyz/api/character?limit=1431',
-    'characters',
-  );
+  const viewModel = useCharactersViewModel();
 
-  useEffect(() => {
-    filterCharacters();
-  }, [characters, searchText]);
-
-  const filterCharacters = () => {
-    const filtered = characters.filter(character =>
-      character.name.toLowerCase().includes(searchText.toLowerCase()),
-    );
-    setFilteredCharacters(filtered);
-  };
-
-  if (loading) {
+  if (viewModel.loading) {
     return <LoadingIndicator />;
   }
 
@@ -62,10 +39,13 @@ const CharactersScreen = ({navigation}) => {
       <TextInput
         style={styles.searchBar}
         placeholder="Search characters..."
-        value={searchText}
-        onChangeText={setSearchText}
+        value={viewModel.searchText}
+        onChangeText={viewModel.setSearchText}
       />
-      <FlatList data={filteredCharacters} renderItem={renderCharacterItem} />
+      <FlatList
+        data={viewModel.filteredCharacters}
+        renderItem={renderCharacterItem}
+      />
     </View>
   );
 };
@@ -82,28 +62,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
     paddingHorizontal: 10,
-  },
-  characterItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 10,
-    padding: 10,
-  },
-  characterInfo: {
-    flex: 1,
-  },
-  characterName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  characterDetails: {
-    fontSize: 14,
-    marginBottom: 3,
   },
 });
 
