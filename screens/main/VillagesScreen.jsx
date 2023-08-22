@@ -1,24 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  FlatList,
-  TextInput,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
+import {View, FlatList, TextInput, StyleSheet} from 'react-native';
 import VillageRow from '../../components/VillageRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import useFetch from '../../hooks/useFetch';
+import useVillagesViewModel from '../../hooks/useVillagesViewModel';
 
 const VillagesScreen = ({navigation}) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const {data: villages, loading} = useFetch(
-    'https://narutodb.xyz/api/village?limit=39',
-    'villages',
-  );
-  const navigateToVillageProfile = village => {
-    navigation.navigate('VillageProfileScreen', {village});
-  };
+  const viewModel = useVillagesViewModel();
 
   const renderVillageItem = ({item}) => {
     return (
@@ -29,17 +16,7 @@ const VillagesScreen = ({navigation}) => {
     );
   };
 
-  const handleSearch = text => {
-    setSearchQuery(text);
-  };
-
-  const filteredVillages = villages.filter(
-    village =>
-      village.characters.length > 0 &&
-      village.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
-  if (loading) {
+  if (viewModel.loading) {
     return <LoadingIndicator />;
   }
 
@@ -48,11 +25,14 @@ const VillagesScreen = ({navigation}) => {
       <TextInput
         style={styles.searchInput}
         placeholder="Search villages"
-        value={searchQuery}
-        onChangeText={handleSearch}
+        value={viewModel.searchQuery}
+        onChangeText={viewModel.handleSearch}
       />
 
-      <FlatList data={filteredVillages} renderItem={renderVillageItem} />
+      <FlatList
+        data={viewModel.filteredVillages}
+        renderItem={renderVillageItem}
+      />
     </View>
   );
 };

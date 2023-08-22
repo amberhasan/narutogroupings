@@ -1,37 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+import {View, FlatList, StyleSheet, TextInput} from 'react-native';
 import CharacterRow from '../../components/CharacterRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import useFetch from '../../hooks/useFetch';
+import useKaraViewModel from '../../hooks/useKaraViewModel';
 
 const KaraScreen = ({navigation}) => {
-  const [searchText, setSearchText] = useState('');
-  const [filteredKara, setFilteredKara] = useState([]);
-  const {data: kara, loading} = useFetch(
-    'https://narutodb.xyz/api/kara?limit=32',
-    'clans',
-  );
-
-  useEffect(() => {
-    filterKara();
-  }, [kara, searchText]);
-
-  const filterKara = () => {
-    const filtered = kara.filter(k =>
-      k.name.toLowerCase().includes(searchText.toLowerCase()),
-    );
-    setFilteredKara(filtered);
-  };
-
-  if (loading) {
+  const viewModel = useKaraViewModel();
+  if (viewModel.loading) {
     return <LoadingIndicator />;
   }
 
@@ -51,10 +26,10 @@ const KaraScreen = ({navigation}) => {
       <TextInput
         style={styles.searchBar}
         placeholder="Search kara..."
-        value={searchText}
-        onChangeText={setSearchText}
+        value={viewModel.searchText}
+        onChangeText={viewModel.setSearchText}
       />
-      <FlatList data={filteredKara} renderItem={renderKaraItem} />
+      <FlatList data={viewModel.filteredKara} renderItem={renderKaraItem} />
     </View>
   );
 };
