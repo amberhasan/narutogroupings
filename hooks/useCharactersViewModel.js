@@ -15,7 +15,6 @@ const useCharactersViewModel = () => {
   }, [characters, searchText]);
 
   const filterCharacters = () => {
-    console.log('characters', characters);
     const filtered = characters.filter(character =>
       character.name.toLowerCase().includes(searchText.toLowerCase()),
     );

@@ -23,7 +23,7 @@ const useTailedBeastsViewModel = () => {
   return {
     searchText,
     setSearchText,
-    filterTailedBeasts,
+    filteredTailedBeasts,
     setFilteredTailedBeasts,
     tailedBeasts,
     loading,

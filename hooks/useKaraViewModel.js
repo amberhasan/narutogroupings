@@ -6,7 +6,7 @@ const useKaraViewModel = () => {
   const [filteredKara, setFilteredKara] = useState([]);
   const {data: kara, loading} = useFetch(
     'https://narutodb.xyz/api/kara?limit=32',
-    'clans',
+    'kara',
   );
 
   useEffect(() => {

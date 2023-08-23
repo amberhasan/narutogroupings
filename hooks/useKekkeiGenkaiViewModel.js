@@ -21,10 +21,11 @@ const useKekkeiGenkaiViewModel = () => {
     );
     setFilteredKekkeiGenkai(filtered);
   };
+
   return {
     searchText,
     setSearchText,
-    filterKekkeiGenkai,
+    filteredKekkeiGenkai,
     setFilteredKekkeiGenkai,
     kekkei_genkai,
     loading,
