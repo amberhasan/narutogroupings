@@ -8,45 +8,33 @@ import {
 } from 'react-native';
 import ClanRow from '../../components/ClanRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import useFetch from '../../hooks/useFetch';
+import useClansViewModel from '../../hooks/useClansViewModel';
 
 const ClansScreen = ({navigation}) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const {data: clans, loading} = useFetch(
-    'https://narutodb.xyz/api/clan?limit=57',
-    'clans',
-  );
+  const viewModel = useClansViewModel();
 
-  const navigateToClanProfile = clan => {
-    navigation.navigate('ClanProfileScreen', {clan});
-  };
-
-  const renderClanItem = ({item}) => {
-    return <ClanRow clan={item} onPress={() => navigateToClanProfile(item)} />;
-  };
-
-  const handleSearch = text => {
-    setSearchQuery(text);
-  };
-
-  const filteredClans = clans.filter(clan =>
-    clan.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
-  if (loading) {
+  if (viewModel.loading) {
     return <LoadingIndicator />;
   }
+  const renderClanItem = ({item}) => {
+    return (
+      <ClanRow
+        clan={item}
+        onPress={() => navigation.navigate('ClanProfileScreen', {clan})}
+      />
+    );
+  };
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.searchInput}
         placeholder="Search clans"
-        value={searchQuery}
-        onChangeText={handleSearch}
+        value={viewModel.searchQuery}
+        onChangeText={viewModel.handleSearch}
       />
 
-      <FlatList data={filteredClans} renderItem={renderClanItem} />
+      <FlatList data={viewModel.filteredClans} renderItem={renderClanItem} />
     </View>
   );
 };
