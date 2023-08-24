@@ -10,28 +10,12 @@ import {
 } from 'react-native';
 import TailedBeastRow from '../../components/TailedBeastRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import useFetch from '../../hooks/useFetch';
+import useTailedBeastsViewModel from '../../hooks/useTailedBeastsViewModel';
 
 const TailedBeastsScreen = ({navigation}) => {
-  const [searchText, setSearchText] = useState('');
-  const [filteredTailedBeasts, setFilteredTailedBeasts] = useState([]);
-  const {data: tailedBeasts, loading} = useFetch(
-    'https://narutodb.xyz/api/tailed-beast?limit=10',
-    'tailedBeasts',
-  );
+  const viewModel = useTailedBeastsViewModel();
 
-  useEffect(() => {
-    filterTailedBeasts();
-  }, [tailedBeasts, searchText]);
-
-  const filterTailedBeasts = () => {
-    const filtered = tailedBeasts.filter(tailedBeast =>
-      tailedBeast.name.toLowerCase().includes(searchText.toLowerCase()),
-    );
-    setFilteredTailedBeasts(filtered);
-  };
-
-  if (loading) {
+  if (viewModel.loading) {
     return <LoadingIndicator />;
   }
 
@@ -51,11 +35,11 @@ const TailedBeastsScreen = ({navigation}) => {
       <TextInput
         style={styles.searchBar}
         placeholder="Search tailed beasts..."
-        value={searchText}
-        onChangeText={setSearchText}
+        value={viewModel.searchText}
+        onChangeText={viewModel.setSearchText}
       />
       <FlatList
-        data={filteredTailedBeasts}
+        data={viewModel.filteredTailedBeasts}
         renderItem={renderTailedBeastItem}
       />
     </View>

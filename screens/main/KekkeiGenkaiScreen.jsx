@@ -1,39 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+import {View, FlatList, StyleSheet, TextInput} from 'react-native';
 import KekkeiGenkaiRow from '../../components/KekkeiGenkaiRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import useFetch from '../../hooks/useFetch';
+import useKekkeiGenkaiViewModel from '../../hooks/useKekkeiGenkaiViewModel';
 
 const KekkeiGenkaiScreen = ({navigation}) => {
-  const [searchText, setSearchText] = useState('');
-  const [filteredKekkeiGenkai, setFilteredKekkeiGenkai] = useState([]);
-  const {data: kekkei_genkai, loading} = useFetch(
-    'https://narutodb.xyz/api/kekkei-genkai?limit=39',
-    'kekkeigenkai',
-  );
+  const viewModel = useKekkeiGenkaiViewModel();
 
-  useEffect(() => {
-    if (kekkei_genkai) {
-      filterKekkeiGenkai();
-    }
-  }, [kekkei_genkai, searchText]);
-
-  const filterKekkeiGenkai = () => {
-    const filtered = kekkei_genkai.filter(kekkei_genkai =>
-      kekkei_genkai.name.toLowerCase().includes(searchText.toLowerCase()),
-    );
-    setFilteredKekkeiGenkai(filtered);
-  };
-
-  if (loading) {
+  if (viewModel.loading) {
     return <LoadingIndicator />;
   }
 
@@ -55,11 +29,11 @@ const KekkeiGenkaiScreen = ({navigation}) => {
       <TextInput
         style={styles.searchBar}
         placeholder="Search kekkei genkai..."
-        value={searchText}
-        onChangeText={setSearchText}
+        value={viewModel.searchText}
+        onChangeText={viewModel.setSearchText}
       />
       <FlatList
-        data={filteredKekkeiGenkai}
+        data={viewModel.filteredKekkeiGenkai}
         renderItem={renderKekkeiGenkaiItem}
       />
     </View>

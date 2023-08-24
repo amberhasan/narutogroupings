@@ -10,28 +10,12 @@ import {
 } from 'react-native';
 import AkatsukiRow from '../../components/AkatsukiRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import useFetch from '../../hooks/useFetch';
+import useAkatsukiViewModel from '../../hooks/useAkatsukiViewModel';
 
 const AkatsukiScreen = ({navigation}) => {
-  const [searchText, setSearchText] = useState('');
-  const [filteredAkatsuki, setFilteredAkatsuki] = useState([]);
-  const {data: akatsuki, loading} = useFetch(
-    'https://narutodb.xyz/api/akatsuki?limit=44',
-    'akatsuki',
-  );
+  const viewModel = useAkatsukiViewModel();
 
-  useEffect(() => {
-    filterAkatsuki();
-  }, [akatsuki, searchText]);
-
-  const filterAkatsuki = () => {
-    const filtered = akatsuki.filter(a =>
-      a.name.toLowerCase().includes(searchText.toLowerCase()),
-    );
-    setFilteredAkatsuki(filtered);
-  };
-
-  if (loading) {
+  if (viewModel.loading) {
     return <LoadingIndicator />;
   }
 
@@ -53,10 +37,13 @@ const AkatsukiScreen = ({navigation}) => {
       <TextInput
         style={styles.searchBar}
         placeholder="Search akatsuki..."
-        value={searchText}
-        onChangeText={setSearchText}
+        value={viewModel.searchText}
+        onChangeText={viewModel.setSearchText}
       />
-      <FlatList data={filteredAkatsuki} renderItem={renderAkatsukiItem} />
+      <FlatList
+        data={viewModel.filteredAkatsuki}
+        renderItem={renderAkatsukiItem}
+      />
     </View>
   );
 };

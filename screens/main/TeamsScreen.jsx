@@ -1,37 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+import {View, FlatList, StyleSheet, TextInput} from 'react-native';
 import TeamRow from '../../components/TeamRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
-import useFetch from '../../hooks/useFetch';
+import useTeamsViewModel from '../../hooks/useTeamsViewModel';
 
 const TeamsScreen = ({navigation}) => {
-  const [searchText, setSearchText] = useState('');
-  const [filteredTeams, setFilteredTeams] = useState([]);
-  const {data: teams, loading} = useFetch(
-    'https://narutodb.xyz/api/team?limit=191',
-    'teams',
-  );
+  const viewModel = useTeamsViewModel();
 
-  useEffect(() => {
-    filterTeams();
-  }, [teams, searchText]);
-
-  const filterTeams = () => {
-    const filtered = teams.filter(team =>
-      team.name.toLowerCase().includes(searchText.toLowerCase()),
-    );
-    setFilteredTeams(filtered);
-  };
-
-  if (loading) {
+  if (viewModel.loading) {
     return <LoadingIndicator />;
   }
 
@@ -51,10 +27,10 @@ const TeamsScreen = ({navigation}) => {
       <TextInput
         style={styles.searchBar}
         placeholder="Search teams..."
-        value={searchText}
-        onChangeText={setSearchText}
+        value={viewModel.searchText}
+        onChangeText={viewModel.setSearchText}
       />
-      <FlatList data={filteredTeams} renderItem={renderTeamItem} />
+      <FlatList data={viewModel.filteredTeams} renderItem={renderTeamItem} />
     </View>
   );
 };
